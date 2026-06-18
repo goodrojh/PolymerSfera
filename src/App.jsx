@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 
-import logo from './assets/logo-polimersfera.png'
-import logoLending from './assets/logo-lendingsfera.png'
 import videoHero from './assets/video-hero.mp4'
 import heroPoster from './assets/hero-warehouse.jpg'
 import painImg from './assets/pain-concrete.jpg'
@@ -115,6 +113,31 @@ const IconMax = (p) => (
   <svg viewBox="0 0 24 24" fill="currentColor" {...p}><path d="M12 2a10 10 0 100 20 10 10 0 000-20zM7 8.5l5 4 5-4V16h-1.6v-4.2L12 14.6 8.6 11.8V16H7V8.5z"/></svg>
 )
 
+/* Логотип-вордмарк (векторный, без растровой картинки) */
+function Logo({ className = '', size = 'md' }) {
+  const txt = size === 'sm' ? 'text-base' : 'text-lg sm:text-xl'
+  const dim = size === 'sm' ? 'h-6 w-6' : 'h-7 w-7 sm:h-8 sm:w-8'
+  return (
+    <span className={`inline-flex items-center gap-2 ${className}`} aria-label="ПолимерСфера">
+      <svg viewBox="0 0 32 32" className={dim} aria-hidden="true">
+        <defs>
+          <radialGradient id="sphereGrad" cx="36%" cy="30%" r="78%">
+            <stop offset="0%" stopColor="#7fdcf0" />
+            <stop offset="50%" stopColor="#0ea5c4" />
+            <stop offset="100%" stopColor="#0a2240" />
+          </radialGradient>
+        </defs>
+        <circle cx="16" cy="16" r="14" fill="url(#sphereGrad)" />
+        <ellipse cx="11.5" cy="10" rx="4.2" ry="2.6" fill="#ffffff" opacity="0.5" />
+      </svg>
+      <span className={`font-extrabold tracking-tight leading-none ${txt}`}>
+        <span className="text-white">Полимер</span>
+        <span className="text-cyan-400">Сфера</span>
+      </span>
+    </span>
+  )
+}
+
 /* ------------------------------------------------------------------ */
 /* Хедер                                                              */
 /* ------------------------------------------------------------------ */
@@ -132,9 +155,7 @@ function Header({ onCta }) {
     <header className="sticky top-0 z-40 border-b border-white/10 bg-navy-950/85 backdrop-blur-md">
       <div className="container-x flex h-16 items-center justify-between gap-4">
         <a href="#top" className="flex items-center">
-          <span className="inline-flex items-center rounded-lg bg-white px-2.5 py-1.5 shadow-sm">
-            <img src={logo} alt="ПолимерСфера — логотип" className="h-5 w-auto sm:h-6" />
-          </span>
+          <Logo />
         </a>
         <nav className="hidden items-center gap-6 lg:flex">
           {links.map(([t, h]) => (
@@ -743,9 +764,7 @@ function Footer() {
     <footer className="bg-navy-950 pt-14 text-slate-300">
       <div className="container-x grid gap-10 pb-10 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <span className="inline-flex items-center rounded-lg bg-white px-2.5 py-2">
-            <img src={logo} alt="ПолимерСфера" className="h-6 w-auto" />
-          </span>
+          <Logo />
           <p className="mt-4 text-sm text-slate-400">
             Промышленные, декоративные и 3D полимерные полы под ключ в Москве и Московской области.
           </p>
@@ -776,12 +795,12 @@ function Footer() {
       <div className="border-t border-white/10 py-6">
         <div className="container-x flex flex-col items-center justify-between gap-3 text-xs text-slate-500 sm:flex-row">
           <span>© {new Date().getFullYear()} ПолимерСфера. Все права защищены.</span>
-          <a href="http://lendingsfera.ru" target="_blank" rel="noopener" className="inline-flex items-center gap-2 hover:text-slate-300">
-            Сайт разработан
-            <span className="inline-flex items-center rounded-md bg-white px-2 py-1">
-              <img src={logoLending} alt="ЛендингСфера" className="h-4 w-auto" />
-            </span>
-          </a>
+          <span>
+            Сайт разработан компанией{' '}
+            <a href="http://lendingsfera.ru" target="_blank" rel="noopener" className="font-semibold text-slate-300 underline decoration-slate-600 underline-offset-2 hover:text-white">
+              ЛендингСфера
+            </a>
+          </span>
         </div>
       </div>
     </footer>
